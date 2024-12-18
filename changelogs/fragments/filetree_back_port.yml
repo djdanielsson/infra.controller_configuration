@@ -1,0 +1,4 @@
+---
+bugfixes:
+  - Backport enhacenments from infra.aap_configuration_extended
+...

@@ -11,6 +11,9 @@ authors:
     - Tom Page @Tompage1994
     - Sean Sullivan @sean-m-sullivan
     - David Danielsson @djdanielsson
+    - Ivan Aragonés
+    - Silvio Perez
+    - Adonis García
 repository: https://github.com/redhat-cop/infra.controller_configuration/
 issues: https://github.com/redhat-cop/infra.controller_configuration/issues
 build_ignore:

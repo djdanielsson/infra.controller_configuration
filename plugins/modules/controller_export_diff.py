@@ -62,7 +62,7 @@ options:
       elements: str
     inventory_sources:
       description:
-        - inventory soruces to export
+        - inventory sources to export
       type: list
       elements: str
     inventory:

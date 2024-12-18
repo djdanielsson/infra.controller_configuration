@@ -1,8 +1,8 @@
 # Red Hat Communities of Practice Controller Configuration Collection
 
-![pre-commit tests](https://github.com/redhat-cop/controller_configuration/actions/workflows/pre-commit.yml/badge.svg)
-![Release](https://github.com/redhat-cop/controller_configuration/actions/workflows/release.yml/badge.svg)
-<!-- markdownlint-disable-line MD033 MD034 --><a href="https://raw.githubusercontent.com/redhat-cop/controller_configuration/devel/docs/aap_config_as_code_public_meeting.ics"><img border="0" alt="Google Calendar invite" src="https://www.google.com/calendar/images/ext/gc_button1_en-GB.gif"></a>
+![pre-commit tests](https://github.com/redhat-cop/infra.controller_configuration/actions/workflows/pre-commit.yml/badge.svg)
+![Release](https://github.com/redhat-cop/infra.controller_configuration/actions/workflows/release.yml/badge.svg)
+<!-- markdownlint-disable-line MD033 MD034 --><a href="https://raw.githubusercontent.com/redhat-cop/infra.controller_configuration/devel/docs/aap_config_as_code_public_meeting.ics"><img border="0" alt="Google Calendar invite" src="https://www.google.com/calendar/images/ext/gc_button1_en-GB.gif"></a>
 <!-- Further CI badges go here as above -->
 
 This Ansible collection allows for easy interaction with an AWX or Ansible Controller server via Ansible roles using the AWX/Controller collection modules.
@@ -41,7 +41,7 @@ The awx.awx or ansible.controller collections MUST be installed in order for thi
 
 |                                      Collection Name                                       |                 Purpose                  |
 |:------------------------------------------------------------------------------------------:|:----------------------------------------:|
-| [Controller Configuration](https://github.com/redhat-cop/controller_configuration) |   Automation controller configuration    |
+| [Controller Configuration](https://github.com/redhat-cop/infra.controller_configuration) |   Automation controller configuration    |
 |             [EE Utilities](https://github.com/redhat-cop/ee_utilities)             | Execution Environment creation utilities |
 |     [AAP installation Utilities](https://github.com/redhat-cop/aap_utilities)      |  Ansible Automation Platform Utilities   |
 |   [AAP Configuration Template](https://github.com/redhat-cop/aap_configuration_template)   |  Configuration Template for this suite   |
@@ -179,13 +179,13 @@ Adding the ability to use direct output from the awx export command in the roles
 
 ## Contributing to this collection
 
-We welcome community contributions to this collection. If you find problems, please open an issue or create a PR against the [Controller Configuration collection repository](https://github.com/redhat-cop/controller_configuration).
-More information about contributing can be found in our [Contribution Guidelines.](https://github.com/redhat-cop/controller_configuration/blob/devel/.github/CONTRIBUTING.md)
+We welcome community contributions to this collection. If you find problems, please open an issue or create a PR against the [Controller Configuration collection repository](https://github.com/redhat-cop/infra.controller_configuration).
+More information about contributing can be found in our [Contribution Guidelines.](https://github.com/redhat-cop/infra.controller_configuration/blob/devel/.github/CONTRIBUTING.md)
 
-We have a community meeting every 4 weeks. Find the agenda in the [issues](https://github.com/redhat-cop/controller_configuration/issues) and the calendar invitation below:
+We have a community meeting every 4 weeks. Find the agenda in the [issues](https://github.com/redhat-cop/infra.controller_configuration/issues) and the calendar invitation below:
 
 <!-- markdownlint-disable-next-line MD033 MD034 -->
-<a target="_blank" href="https://raw.githubusercontent.com/redhat-cop/controller_configuration/devel/docs/aap_config_as_code_public_meeting.ics"><img border="0" alt="Google Calendar invite" src="https://www.google.com/calendar/images/ext/gc_button1_en-GB.gif"></a>
+<a target="_blank" href="https://raw.githubusercontent.com/redhat-cop/infra.controller_configuration/devel/docs/aap_config_as_code_public_meeting.ics"><img border="0" alt="Google Calendar invite" src="https://www.google.com/calendar/images/ext/gc_button1_en-GB.gif"></a>
 
 ## Code of Conduct
 

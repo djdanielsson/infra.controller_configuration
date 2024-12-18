@@ -17,6 +17,7 @@ The following variables are required for that role to work properly:
 | `organization_id` | N/A | no | int | Alternative to `organization_filter`, but specifiying the current organization's ID to filter by. Exports only the objects belonging to the specified organization (applies to all the objects that can be assigned to an organization). |
 | `project_id` | N/A | no | int | Specifiying the project id to filter by. Exports the project belonging to the specified organization. |
 | `job_template_id` | N/A | no | int | Specifiying the job template id to filter by. Exports the job template belonging to the specified organization. |
+| `inventory_id` | N/A | no | int | Specifiying the inventory id to filter by. Exports the inventory belonging to the specified organization. |
 | `workflow_job_template_id` | N/A | no | int | Specifiying the workflow job template id to filter by. Exports the workflow job template belonging to the specified organization. |
 | `schedule_id` | N/A | no | int | Specifiying the schedule id to filter by. Exports the schedule belonging to the specified object. |
 | `output_path` | `/tmp/filetree_output` | yes | str | The path to the output directory where all the generated `yaml` files with the corresponding Objects as code will be written to. |
@@ -27,12 +28,17 @@ The following variables are required for that role to work properly:
 | `organization`| N/A | no | str | Default organization for all objects that have not been set in the source controller.|
 | `export_related_objects` | False | no | bool | Whether to export related objects (job templates related to certain workflows and the projects associated with these job templates) when a single JT or a single WFJT are being exported. |
 | `update_project_state` | False | no | bool | Whether the project should be updated after import to the target controller. |
+| `skip_inventory_sources` | False | no | bool | Whether the inventory sources should be exported with inventory. |
+| `skip_inventory_hosts` | False | no | bool | Whether the inventory hosts should be exported with inventory. |
+| `skip_inventory_groups` | False | no | bool | Whether the inventory groups should be exported with inventory. |
+| `templates_overrides_resources`| N/A | no | dict | Whether the certain objects should be modified during the export |
+| `templates_overrides_global`| N/A | no | dict | Whether the all objects should be modified during the export |
 
 ## Dependencies
 
 A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
-## Example Playbook
+## Example Playbook - export everything without modifications
 
 ```yaml
 ---
@@ -200,6 +206,44 @@ A playbook to convert from the structured output to the flattened one is provide
 
 ```console
 ansible-playbook infra.controller_configuration.flatten_filetree_create_output.yaml -e '{filetree_create_output_dir: /tmp/filetree_output}'
+```
+
+## Example Playbook - export object with modifications
+
+This example will export all object but some with modifications:
+
+- job template called `job_template_example` will be exported with the `dev` branch, while the rest of the job templates will use the `main` branch — the resources dictionary takes precedence over the global dictionary.
+- all projects will have a Jinja2 expression assigned to the `scm_branch`.
+- all schedules enabled state will be set as `false`.
+
+```yaml
+---
+- hosts: all
+  connection: local
+  gather_facts: false
+  vars:
+    aap_username: "{{ vault_aap_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
+    aap_oauthtoken : "{{ vault_aap_password | default(lookup('env', 'CONTROLLER_OAUTHTOKEN')) }}"
+    aap_hostname: "{{ vault_aap_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
+    aap_validate_certs: "{{ vault_aap_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}"
+
+    templates_overrides_resources:
+      job_template:
+        job_template_example:
+          scm_branch: "dev"
+
+    templates_overrides_global:
+      job_template:
+        scm_branch: "main"
+      project:
+        scm_branch: !unsafe  "{{ 'true' if AAP.environment == 'PROD' else 'false' }}"
+      schedules:
+        enabled: false
+
+  roles:
+    - infra.aap_configuration_extended.filetree_create
+
+...
 ```
 
 ## License
